@@ -1,0 +1,30 @@
+<nav>
+  <ul class="m-0 pagination">
+    <li class="page-item" style="width: 30%">
+      <a
+        class="page-link"
+        [routerLink]="[
+          { outlets: { primary: ['chat'], contenido: ['page-chat'] } }
+        ]"
+        >Chat</a
+      >
+    </li>
+    <li class="page-item" style="width: 40%">
+      <a
+        class="page-link"
+        [routerLink]="[
+          {
+            outlets: {
+              primary: ['publicaciones'],
+              contenido: ['page-publicaciones']
+            }
+          }
+        ]"
+        >Publicaciones</a
+      >
+    </li>
+    <li class="page-item" style="width: 30%">
+      <a class="page-link" routerLink="#">personas</a>
+    </li>
+  </ul>
+</nav>

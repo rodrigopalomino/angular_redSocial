@@ -1,0 +1,32 @@
+<div
+  class="d-flex justify-content-around align-items-center"
+  style="background: red"
+>
+  <div>
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/6326/6326055.png"
+      class="img-fluid"
+      width="50px"
+    />
+    <span>Usuario2</span>
+  </div>
+
+  <div class="dropdown">
+    <button
+      class="btn dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <!-- <img src="assets/gear.svg" width="30px" /> -->
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+      <li>
+        <button class="dropdown-item" (click)="clickLogOut()">
+          Cerrar Sesion
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

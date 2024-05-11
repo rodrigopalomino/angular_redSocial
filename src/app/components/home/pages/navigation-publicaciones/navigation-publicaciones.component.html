@@ -1,0 +1,51 @@
+<div class="">
+  <a class="btn btn-primary w-50" (click)="createPublicacion()"
+    >Crear Publicacion</a
+  >
+  <button class="btn btn-info w-50">Ver mis Publicacion</button>
+</div>
+
+<div class="overflow-auto" style="height: 84%">
+  @for (publicacion of publicaciones; track publicacion.publicacion_id ) {
+  <div class="card rounded-0">
+    <div class="card-body p-2">
+      <h5 class="card-title">{{ publicacion.titulo }}</h5>
+      <p class="card-text">
+        {{ publicacion.sinopsis }}
+      </p>
+      <div class="d-flex justify-content-around">
+        <span>{{ publicacion.c_comentario }} Comentarios</span>
+
+        <div class="d-flex">
+          <span class="me-2">{{ publicacion.c_like }}</span>
+          <!-- //boton likes -->
+          <div
+            class="text-center me-4"
+            (click)="clickLike(publicacion.publicacion_id || 0)"
+          >
+            <div
+              class="bg-primary d-flex p-1 rounded-5"
+              style="width: fit-content"
+            >
+              <img src="assets/like.svg" width="20px" />
+            </div>
+          </div>
+          <span class="me-2">{{ publicacion.c_dislike }}</span>
+          <!-- boton dislike -->
+          <div
+            class="text-center"
+            (click)="clickDislike(publicacion.publicacion_id || 0)"
+          >
+            <div
+              class="bg-danger d-flex p-1 rounded-5"
+              style="width: fit-content"
+            >
+              <img src="assets/dislike.svg" width="20px" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

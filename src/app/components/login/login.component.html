@@ -1,0 +1,33 @@
+<div
+  style="width: 100vw; height: 100vh; background: #f0f0f1"
+  class="d-flex justify-content-center align-items-center"
+>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="login()"
+    style="padding: 20px"
+    class="bg-white border rounded-2"
+  >
+    <h2 class="text-center mb-4">Login</h2>
+
+    <input
+      formControlName="email"
+      type="text"
+      placeholder="Email"
+      class="form-control mb-2"
+    />
+    <input
+      formControlName="password"
+      type="text"
+      placeholder="Contraseña"
+      class="form-control"
+    />
+    <small class="text-danger">{{ error }}</small>
+    <div class="d-grid my-2">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+
+    <span>No tiene cuenta?<a routerLink="/signUp">Registrarse</a></span>
+  </form>
+</div>
+<nav></nav>

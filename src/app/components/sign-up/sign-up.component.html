@@ -1,0 +1,45 @@
+<div
+  style="width: 100vw; height: 100vh; background: #f0f0f1"
+  class="d-flex justify-content-center align-items-center"
+>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="signUp()"
+    style="padding: 20px"
+    class="bg-white border rounded-2"
+  >
+    <h2 class="text-center mb-4">Registrarse</h2>
+
+    <input
+      type="text"
+      formControlName="nombre"
+      placeholder="Nombre"
+      class="form-control mb-2"
+    />
+    <input
+      type="text"
+      formControlName="email"
+      placeholder="Email"
+      class="form-control mb-2"
+    />
+    <input
+      type="text"
+      formControlName="password1"
+      placeholder="Contraseña"
+      class="form-control mb-3"
+    />
+    <input
+      type="text"
+      formControlName="password2"
+      placeholder="Repetir Contraseña"
+      class="form-control"
+    />
+    <small class="text-danger">{{ errorPassword }}</small>
+    <div class="d-grid my-2">
+      <button type="submit" class="btn btn-primary">Registrarse</button>
+    </div>
+
+    <span>Ya tengo cuenta?<a routerLink="/login">login</a></span>
+  </form>
+  <h1>{{ form.valid }}</h1>
+</div>

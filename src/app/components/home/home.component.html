@@ -1,0 +1,15 @@
+<div
+  class="vh-100 d-flex align-items-center justify-content-center"
+  style="background: linear-gradient(to right, #075cf8, #ce1d61)"
+>
+  <div class="d-flex" style="background: white; width: 85vw; height: 85vh">
+    <div style="width: 25%; height: 100%">
+      <app-perfil />
+      <app-navigation></app-navigation>
+      <router-outlet></router-outlet>
+    </div>
+    <div style="background: #d9dbdf; width: 75%; height: 100%">
+      <router-outlet name="contenido"></router-outlet>
+    </div>
+  </div>
+</div>
