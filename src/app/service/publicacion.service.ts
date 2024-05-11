@@ -10,8 +10,8 @@ export class PublicacionService {
   api: string;
 
   constructor(private http: HttpClient) {
-    this.api = 'http://localhost:3000/publicacion';
-    // this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/publicacion';
+    // this.api = 'http://localhost:3000/publicacion';
+    this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/publicacion';
   }
 
   getPublicaciones(): Observable<Publicacion[]> {

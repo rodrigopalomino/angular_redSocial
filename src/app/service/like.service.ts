@@ -9,8 +9,8 @@ export class LikeService {
   api: string;
 
   constructor(private http: HttpClient) {
-    this.api = 'http://localhost:3000/like';
-    // this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/like';
+    // this.api = 'http://localhost:3000/like';
+    this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/like';
   }
 
   like(publicacion_id: number): Observable<any> {

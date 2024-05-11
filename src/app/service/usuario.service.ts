@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 export class UsuarioService {
   api: string;
   constructor(private http: HttpClient) {
-    this.api = 'http://localhost:3000/usuario';
-    // this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/usuario';
+    // this.api = 'http://localhost:3000/usuario';
+    this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/usuario';
   }
 
   validate(): Observable<any> {
