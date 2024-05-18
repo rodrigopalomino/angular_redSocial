@@ -42,7 +42,6 @@ export class SignUpComponent {
     if (this.form.invalid) {
       Object.values(this.form.controls).forEach((control) => {
         control.markAllAsTouched();
-        console.log(this.form);
       });
       return;
     }
@@ -62,13 +61,11 @@ export class SignUpComponent {
 
     this._usuarioService.signUp(newUsuario).subscribe({
       next: (res: any) => {
-        console.log('nuevo usuario creado');
-        console.log(res);
         this.router.navigate(['/login']);
       },
       error: (e: HttpErrorResponse) => {
-        console.log('error');
-        console.log(e);
+        this.errorPassword = 'Email en uso';
+        return;
       },
     });
   }

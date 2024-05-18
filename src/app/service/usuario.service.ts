@@ -7,10 +7,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UsuarioService {
-  api: string;
-  constructor(private http: HttpClient) {
-    // this.api = 'http://localhost:3000/usuario';
-    this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/usuario';
+  api: string = 'http://localhost:3000/usuario';
+  // api: string = 'https://gjwtnwmv-3000.brs.devtunnels.ms/usuario';
+
+  constructor(private http: HttpClient) {}
+
+  getUsuario(): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.api}`, { withCredentials: true });
   }
 
   validate(): Observable<any> {
@@ -31,5 +34,11 @@ export class UsuarioService {
 
   logOut(): Observable<any> {
     return this.http.get<any>(`${this.api}/logOut`, { withCredentials: true });
+  }
+
+  updateUsuario(usuario: Partial<Usuario>): Observable<any> {
+    return this.http.put<any>(`${this.api}/update`, usuario, {
+      withCredentials: true,
+    });
   }
 }

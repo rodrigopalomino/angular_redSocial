@@ -1,13 +1,15 @@
-<div class="">
-  <a class="btn btn-primary w-50" (click)="createPublicacion()"
-    >Crear Publicacion</a
-  >
-  <button class="btn btn-info w-50">Ver mis Publicacion</button>
-</div>
+<a class="btn btn-primary w-50" (click)="createPublicacion()"
+  >Crear Publicacion</a
+>
+<button class="btn btn-info w-50">Ver mis Publicacion</button>
 
+@if (likes) {
 <div class="overflow-auto" style="height: 84%">
   @for (publicacion of publicaciones; track publicacion.publicacion_id ) {
-  <div class="card rounded-0">
+  <div
+    class="card rounded-0"
+    (click)="clickPublicacion(publicacion.publicacion_id)"
+  >
     <div class="card-body p-2">
       <h5 class="card-title">{{ publicacion.titulo }}</h5>
       <p class="card-text">
@@ -24,7 +26,10 @@
             (click)="clickLike(publicacion.publicacion_id || 0)"
           >
             <div
-              class="bg-primary d-flex p-1 rounded-5"
+              class="border border-primary d-flex p-1 rounded-5"
+              [ngClass]="{
+                'bg-primary': boolLike(publicacion.publicacion_id || 0)
+              }"
               style="width: fit-content"
             >
               <img src="assets/like.svg" width="20px" />
@@ -37,10 +42,13 @@
             (click)="clickDislike(publicacion.publicacion_id || 0)"
           >
             <div
-              class="bg-danger d-flex p-1 rounded-5"
+              class="border border-danger d-flex p-1 rounded-5"
+              [ngClass]="{
+                'bg-danger': boolDislike(publicacion.publicacion_id || 0)
+              }"
               style="width: fit-content"
             >
-              <img src="assets/dislike.svg" width="20px" />
+              <img src="assets/dislike.svg" class="imf" width="20px" />
             </div>
           </div>
         </div>
@@ -49,3 +57,5 @@
   </div>
   }
 </div>
+
+}

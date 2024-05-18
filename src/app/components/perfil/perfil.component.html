@@ -1,0 +1,47 @@
+@if (usuario) {
+<div
+  class="vh-100 d-flex align-items-center justify-content-center"
+  style="background: linear-gradient(to right, #075cf8, #ce1d61)"
+>
+  <div class="d-flex" style="background: white; width: 85vw; height: 85vh">
+    <div class="container pt-2">
+      <button (click)="clickRetroceder()">Retroceder</button>
+      <div class="d-flex justify-content-around">
+        <div
+          style="
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+          "
+        >
+          <img src="{{ usuario.avatar }}" height="190px" />
+        </div>
+        <div class="w-75">
+          <h2 class="h1">{{ usuario.nombre }}</h2>
+          <p>{{ usuario.email }}</p>
+          <p>
+            {{ usuario.info }}
+          </p>
+          <p class="h5">Reside</p>
+          <p>{{ usuario.distrito }}</p>
+          <p class="h5">Estudios</p>
+          <p>{{ usuario.estudio }}</p>
+          <p class="h5">Redes Sociales</p>
+          <a href="#" class="d-block">{{ usuario.facebook }}</a>
+          <a href="#" class="d-block">{{ usuario.github }}</a>
+          <a href="#" class="d-block">{{ usuario.instagram }}</a>
+          <a class="btn btn-primary" [routerLink]="['/editarPerfil']"
+            >Editar Perfil</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+}

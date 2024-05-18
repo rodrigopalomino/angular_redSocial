@@ -10,22 +10,18 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './navigation.component.css',
 })
 export class NavigationComponent implements OnInit {
-  boolChat: boolean = true;
-  boolPublicaciones: boolean = false;
-  boolPersonas: boolean = false;
+  boolChat!: boolean;
+  boolPublicaciones!: boolean;
+  boolPersonas!: boolean;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // this.imprimirUrlActual();
+    this.boolChat = this.router.url.includes('chat');
+    this.boolPublicaciones = this.router.url.includes('publicaciones');
+    this.boolPersonas = this.router.url.includes('personas');
   }
 
-  imprimirUrlActual() {
-    const urlActual = this.router.url;
-    console.log('das');
-
-    console.log('URL actual:', urlActual);
-  }
   seleccionarChat() {
     this.boolChat = true;
     this.boolPublicaciones = false;

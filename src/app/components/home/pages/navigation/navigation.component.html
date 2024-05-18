@@ -3,6 +3,8 @@
     <li class="page-item" style="width: 30%">
       <a
         class="page-link"
+        (click)="seleccionarChat()"
+        [ngClass]="{ active: boolChat }"
         [routerLink]="[
           { outlets: { primary: ['chat'], contenido: ['page-chat'] } }
         ]"
@@ -12,6 +14,8 @@
     <li class="page-item" style="width: 40%">
       <a
         class="page-link"
+        (click)="seleccionarPublicaciones()"
+        [ngClass]="{ active: boolPublicaciones }"
         [routerLink]="[
           {
             outlets: {

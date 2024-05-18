@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { PerfilComponent } from '../../shared/perfil/perfil.component';
-import { NavigationComponent } from '../../shared/navigation/navigation.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { NavigationComponent } from './pages/navigation/navigation.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({

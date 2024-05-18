@@ -9,6 +9,8 @@ import { NavigationPublicacionesComponent } from './components/home/pages/naviga
 import { ContenidoChatComponent } from './components/home/pages/contenido-chat/contenido-chat.component';
 import { ContenidoPublicacionesComponent } from './components/home/pages/contenido-publicaciones/contenido-publicaciones.component';
 import { CreatePublicacionComponent } from './components/create-publicacion/create-publicacion.component';
+import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +37,14 @@ export const routes: Routes = [
         outlet: 'contenido',
       },
     ],
+  },
+  {
+    path: 'perfil',
+    component: PerfilComponent,
+  },
+  {
+    path: 'editarPerfil',
+    component: EditarPerfilComponent,
   },
   {
     path: 'login',

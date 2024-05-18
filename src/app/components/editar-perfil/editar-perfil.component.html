@@ -1,0 +1,99 @@
+@if (usuario) {
+<div
+  class="vh-100 d-flex align-items-center justify-content-center"
+  style="background: linear-gradient(to right, #075cf8, #ce1d61)"
+>
+  <div
+    class="container py-2"
+    style="background: white; width: 85vw; height: 85vh; overflow-y: scroll"
+  >
+    <button (click)="clickRetroceder()">Retroceder</button>
+    <h2>Editar Perfil</h2>
+    <div
+      style="
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      "
+    >
+      <img [src]="form.get('avatar')?.value" height="190px" />
+    </div>
+    <form [formGroup]="form" (submit)="submit()">
+      <label class="form-label" for="avatar">Imagen:</label>
+      <input
+        class="form-control mb-2"
+        type="text"
+        id="avatar"
+        formControlName="avatar"
+      />
+
+      <!-- nombre -->
+      <label class="form-label" for="nombre">nombre:</label>
+      <input
+        class="form-control mb-2"
+        type="text"
+        id="nombre"
+        formControlName="nombre"
+      />
+
+      <!-- info -->
+      <label class="form-label" for="info">Info:</label>
+      <textarea class="form-control mb-2" id="info" formControlName="info">{{
+        usuario.info
+      }}</textarea>
+
+      <!-- distrito -->
+      <label class="form-label" for="distrito">Distrito:</label>
+      <select class="form-select mb-2" id="distrito" formControlName="distrito">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+
+      <!-- estudios -->
+      <label class="form-label" for="estudio">Estudios:</label>
+      <input
+        class="form-control mb-2"
+        type="text"
+        id="estudio"
+        formControlName="estudio"
+      />
+
+      <!-- facebook -->
+      <label class="form-label" for="facebook">facebook:</label>
+      <input
+        class="form-control mb-2"
+        type="text"
+        id="facebook"
+        formControlName="facebook"
+      />
+
+      <!-- github -->
+      <label class="form-label" for="github">github:</label>
+      <input
+        class="form-control mb-2"
+        type="text"
+        id="github"
+        formControlName="github"
+      />
+
+      <!-- instagram -->
+      <label class="form-label" for="instagram">instagram:</label>
+      <input
+        class="form-control mb-2"
+        type="text"
+        id="instagram"
+        formControlName="instagram"
+      />
+      <small class="d-block text-danger">Error</small>
+      <button class="btn btn-primary">Actualizar</button>
+    </form>
+  </div>
+</div>
+
+}

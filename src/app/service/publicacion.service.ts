@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Publicacion } from '../interface/publicacion';
 
@@ -7,11 +7,12 @@ import { Publicacion } from '../interface/publicacion';
   providedIn: 'root',
 })
 export class PublicacionService {
+  @Output() GetPublicacionId: EventEmitter<any> = new EventEmitter();
   api: string;
 
   constructor(private http: HttpClient) {
-    // this.api = 'http://localhost:3000/publicacion';
-    this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/publicacion';
+    this.api = 'http://localhost:3000/publicacion';
+    // this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/publicacion';
   }
 
   getPublicaciones(): Observable<Publicacion[]> {
