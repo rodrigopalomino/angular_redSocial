@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PublicacionService } from '../../../../service/publicacion.service';
 import { Publicacion } from '../../../../interface/publicacion';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ComentarioService } from '../../../../service/comentario.service';
 import {
   FormBuilder,
@@ -13,6 +13,8 @@ import {
 import { Comentario } from '../../../../interface/comentario';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DateFormatPipe } from '../../../../pipe/date-format.pipe';
+import { UsuarioService } from '../../../../service/usuario.service';
+import { Usuario } from '../../../../interface/usuario';
 
 @Component({
   selector: 'app-contenido-publicaciones',
@@ -26,16 +28,19 @@ export class ContenidoPublicacionesComponent implements OnInit {
   boolContenido: boolean = true;
   publicacion!: Publicacion;
   comentarios: Comentario[] = [];
+  usuario!: Usuario;
 
   constructor(
-    private route: ActivatedRoute,
+    private _usuarioService: UsuarioService,
     private _publicacionService: PublicacionService,
     private _comentarioService: ComentarioService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.getUsuario();
     this.getPublicacion();
   }
 
@@ -53,7 +58,6 @@ export class ContenidoPublicacionesComponent implements OnInit {
 
     this._comentarioService.createComentario(newComentario).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.getComentarios(publicacion_id);
       },
       error: (e: HttpErrorResponse) => {
@@ -62,17 +66,8 @@ export class ContenidoPublicacionesComponent implements OnInit {
     });
   }
 
-  clickCargarComentarios(publicacion_id: number) {
-    this.boolContenido = !this.boolContenido;
-    this._comentarioService.getComentarios(publicacion_id).subscribe((data) => {
-      console.log(data);
-      this.comentarios = data;
-    });
-  }
-
   getComentarios(publicacion_id: number) {
     this._comentarioService.getComentarios(publicacion_id).subscribe((data) => {
-      console.log(data);
       this.comentarios = data;
     });
   }
@@ -84,6 +79,34 @@ export class ContenidoPublicacionesComponent implements OnInit {
         .subscribe((data) => {
           this.publicacion = data;
         });
+    });
+  }
+
+  getUsuario() {
+    this._usuarioService.getUsuario().subscribe((data) => {
+      this.usuario = data;
+    });
+  }
+
+  clickEditarPubliacion(publicacion_id: number) {
+    this.router.navigateByUrl(`/publicaciones/update/${publicacion_id}`);
+  }
+
+  clickCargarComentarios(publicacion_id: number) {
+    this.boolContenido = !this.boolContenido;
+    this._comentarioService.getComentarios(publicacion_id).subscribe((data) => {
+      this.comentarios = data;
+    });
+  }
+
+  clickDeletePublicacion(publicacion_id: number) {
+    this._publicacionService.deletePublicacion(publicacion_id).subscribe({
+      next: (res: any) => {
+        window.location.reload();
+      },
+      error: (e: HttpErrorResponse) => {
+        console.log(e);
+      },
     });
   }
 }

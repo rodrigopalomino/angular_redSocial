@@ -14,6 +14,23 @@
   </div>
 
   <div class="container">
+    <div
+      class="mb-2"
+      [ngClass]="{ 'd-none': usuario.usuario_id !== publicacion.usuario_id }"
+    >
+      <button
+        class="btn btn-primary d-block"
+        (click)="clickEditarPubliacion(publicacion.publicacion_id || 0)"
+      >
+        Editar publicacion
+      </button>
+      <button
+        class="btn btn-danger"
+        (click)="clickDeletePublicacion(publicacion.publicacion_id || 0)"
+      >
+        Borrar publicacion
+      </button>
+    </div>
     <button
       class="btn btn-primary"
       (click)="clickCargarComentarios(publicacion.publicacion_id || 0)"

@@ -1,15 +1,11 @@
+@if (publicacion) {
 <div
   class="vh-100 d-flex align-items-center justify-content-center"
   style="background: linear-gradient(to right, #075cf8, #ce1d61)"
 >
-  <div
-    [formGroup]="form"
-    (ngSubmit)="crearPublicacion()"
-    class="container"
-    style="background: white; width: 85vw; height: 85vh"
-  >
-    <h2>Crear Publicacion</h2>
-    <form class="" action="">
+  <div class="container" style="background: white; width: 85vw; height: 85vh">
+    <h2>Editar Publicacion</h2>
+    <form [formGroup]="form" (submit)="submit()">
       <input
         formControlName="titulo"
         class="form form-control"
@@ -34,18 +30,9 @@
           id=""
         ></textarea>
       </div>
-      <button class="btn btn-primary">Crear</button>
+      <button class="btn btn-primary">editar</button>
     </form>
   </div>
 </div>
 
-<!-- export interface Publicacion {
-  publicacion_id?: number;
-  usuario_id: number;
-  titulo: string;
-  sinopsis: string;
-  contenido: string;
-  c_like?: number;
-  c_dislike?: number;
-  c_comentario?: number;
-} -->
+}

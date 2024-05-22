@@ -8,17 +8,24 @@ import { Publicacion } from '../interface/publicacion';
 })
 export class PublicacionService {
   @Output() GetPublicacionId: EventEmitter<any> = new EventEmitter();
-  api: string;
+  api: string = 'http://localhost:3000/publicacion';
+  // api: string = 'https://gjwtnwmv-3000.brs.devtunnels.ms/publicacion';
 
-  constructor(private http: HttpClient) {
-    this.api = 'http://localhost:3000/publicacion';
-    // this.api = 'https://gjwtnwmv-3000.brs.devtunnels.ms/publicacion';
-  }
+  constructor(private http: HttpClient) {}
 
-  getPublicaciones(): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(`${this.api}`, {
+  getPublicaciones(titulo: string): Observable<Publicacion[]> {
+    return this.http.get<Publicacion[]>(`${this.api}?search=${titulo}`, {
       withCredentials: true,
     });
+  }
+
+  getPublicaionesUsuario(titulo: string): Observable<Publicacion[]> {
+    return this.http.get<Publicacion[]>(
+      `${this.api}/usuario?search=${titulo}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   getPublicacion(publicacion_id: string): Observable<Publicacion> {
@@ -29,6 +36,18 @@ export class PublicacionService {
 
   createPublicacion(publicacion: Publicacion): Observable<any> {
     return this.http.post<any>(`${this.api}/create`, publicacion, {
+      withCredentials: true,
+    });
+  }
+
+  updatePublicacion(publicacion: Partial<Publicacion>): Observable<any> {
+    return this.http.put(`${this.api}/update`, publicacion, {
+      withCredentials: true,
+    });
+  }
+
+  deletePublicacion(publicacion_id: number): Observable<any> {
+    return this.http.delete<any>(`${this.api}/delete/${publicacion_id}`, {
       withCredentials: true,
     });
   }

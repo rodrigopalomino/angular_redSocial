@@ -11,6 +11,7 @@ import { ContenidoPublicacionesComponent } from './components/home/pages/conteni
 import { CreatePublicacionComponent } from './components/create-publicacion/create-publicacion.component';
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { EditarPublicacionComponent } from './components/editar-publicacion/editar-publicacion.component';
 
 export const routes: Routes = [
   {
@@ -57,5 +58,9 @@ export const routes: Routes = [
   {
     path: 'publicaciones/create',
     component: CreatePublicacionComponent,
+  },
+  {
+    path: 'publicaciones/update/:publicacion_id',
+    component: EditarPublicacionComponent,
   },
 ];

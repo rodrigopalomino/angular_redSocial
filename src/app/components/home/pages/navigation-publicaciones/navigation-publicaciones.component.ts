@@ -8,11 +8,17 @@ import { Like } from '../../../../interface/like';
 import { CommonModule } from '@angular/common';
 import { DislikeService } from '../../../../service/dislike.service';
 import { Dislike } from '../../../../interface/dislike';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-navigation-publicaciones',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, ReactiveFormsModule],
   templateUrl: './navigation-publicaciones.component.html',
   styleUrl: './navigation-publicaciones.component.css',
 })
@@ -20,24 +26,46 @@ export class NavigationPublicacionesComponent implements OnInit {
   publicaciones: Publicacion[] = [];
   likes: Like[] = [];
   dislikes: Dislike[] = [];
+  form!: FormGroup;
+  bool: boolean = true;
 
   constructor(
     private _publicacionService: PublicacionService,
     private _likeService: LikeService,
     private _dislikeService: DislikeService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.createForm();
     this.getLikes();
     this.getDislike();
     this.getPublicaciones();
   }
 
+  createForm() {
+    this.form = this.fb.group({
+      titulo: ['', []],
+    });
+  }
+
   getPublicaciones() {
-    this._publicacionService.getPublicaciones().subscribe((data) => {
+    const titulo = this.form.get('titulo')?.value;
+    this.bool = true;
+    this._publicacionService.getPublicaciones(titulo).subscribe((data) => {
       this.publicaciones = data;
     });
+  }
+
+  getPublicacionesUsuario() {
+    const titulo = this.form.get('titulo')?.value;
+    this.bool = false;
+    this._publicacionService
+      .getPublicaionesUsuario(titulo)
+      .subscribe((data) => {
+        this.publicaciones = data;
+      });
   }
 
   getLikes() {
@@ -61,7 +89,14 @@ export class NavigationPublicacionesComponent implements OnInit {
   clickLike(publicacion_id: number) {
     this._likeService.like(publicacion_id).subscribe({
       next: (res: any) => {
-        this.getPublicaciones();
+        if (this.bool) {
+          console.log('1');
+
+          this.getPublicaciones();
+        } else {
+          console.log('2');
+          this.getPublicacionesUsuario();
+        }
         this.getLikes();
         this.getDislike();
       },
@@ -74,7 +109,12 @@ export class NavigationPublicacionesComponent implements OnInit {
   clickDislike(publicacion_id: number) {
     this._dislikeService.dislike(publicacion_id).subscribe({
       next: (res: any) => {
-        this.getPublicaciones();
+        if (this.bool) {
+          this.getPublicaciones();
+        } else {
+          this.getPublicacionesUsuario();
+        }
+
         this.getLikes();
         this.getDislike();
       },

@@ -33,7 +33,6 @@ export class PerfilComponent implements OnInit {
   clickLogOut() {
     this._usuarioService.logOut().subscribe({
       next: (res: any) => {
-        console.log(res);
         this.router.navigateByUrl('/login');
       },
       error: (e: HttpErrorResponse) => {

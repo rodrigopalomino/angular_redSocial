@@ -9,6 +9,7 @@ import { PublicacionService } from '../../service/publicacion.service';
 import { Publicacion } from '../../interface/publicacion';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-publicacion',
@@ -23,7 +24,8 @@ export class CreatePublicacionComponent {
   constructor(
     private fb: FormBuilder,
     private _publiacionService: PublicacionService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.createForm();
   }
@@ -46,9 +48,10 @@ export class CreatePublicacionComponent {
     this._publiacionService.createPublicacion(newPublicacion).subscribe({
       next: (res: any) => {
         console.log(res);
-        this.router.navigateByUrl(
-          `/publicaciones(contenido:page-publicaciones)`
-        );
+        this.location.back();
+        // this.router.navigateByUrl(
+        //   `/publicaciones(contenido:page-publicaciones)`
+        // );
       },
       error: (e: HttpErrorResponse) => {
         console.log(e);

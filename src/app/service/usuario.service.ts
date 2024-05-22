@@ -13,7 +13,9 @@ export class UsuarioService {
   constructor(private http: HttpClient) {}
 
   getUsuario(): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.api}`, { withCredentials: true });
+    return this.http.get<Usuario>(`${this.api}/token`, {
+      withCredentials: true,
+    });
   }
 
   validate(): Observable<any> {
