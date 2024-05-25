@@ -28,7 +28,20 @@
       >
     </li>
     <li class="page-item" style="width: 30%">
-      <a class="page-link" routerLink="#">personas</a>
+      <a
+        class="page-link"
+        (click)="seleccionarPersonas()"
+        [ngClass]="{ active: boolPersonas }"
+        [routerLink]="[
+          {
+            outlets: {
+              primary: ['personas'],
+              contenido: ['page-personas']
+            }
+          }
+        ]"
+        >personas</a
+      >
     </li>
   </ul>
 </nav>

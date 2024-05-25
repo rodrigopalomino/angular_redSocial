@@ -18,17 +18,26 @@
     </li>
   </ul>
 </nav>
-<form [formGroup]="form">
+<form [formGroup]="form" (submit)="submit()">
   <input
     type="text"
     class="form-control"
     formControlName="titulo"
-    (input)="getPublicaciones()"
+    (input)="submit()"
   />
+  <select formControlName="item">
+    <option value="c_like">Like</option>
+    <option value="c_dislike">Dislike</option>
+  </select>
+  <select formControlName="order" name="" id="">
+    <option value="asc">Ascendente</option>
+    <option value="desc">Descendete</option>
+  </select>
+  <button>filtrar</button>
 </form>
 
 @if (likes) {
-<div class="overflow-auto" style="height: 79.9%">
+<div class="overflow-auto" style="height: 76%">
   @for (publicacion of publicaciones; track publicacion.publicacion_id ) {
   <div
     class="card rounded-0"

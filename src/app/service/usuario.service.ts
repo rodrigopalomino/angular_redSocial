@@ -18,6 +18,12 @@ export class UsuarioService {
     });
   }
 
+  getUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.api}`, {
+      withCredentials: true,
+    });
+  }
+
   validate(): Observable<any> {
     return this.http.get(`${this.api}/validate`, { withCredentials: true });
   }

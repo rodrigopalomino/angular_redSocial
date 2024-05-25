@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Publicacion } from '../interface/publicacion';
@@ -13,19 +13,46 @@ export class PublicacionService {
 
   constructor(private http: HttpClient) {}
 
-  getPublicaciones(titulo: string): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(`${this.api}?search=${titulo}`, {
+  getPublicaciones(
+    titulo?: string,
+    item?: string,
+    order?: string
+  ): Observable<Publicacion[]> {
+    let params = new HttpParams();
+
+    if (titulo) {
+      params = params.set('titulo', titulo);
+    }
+
+    if (item && order) {
+      params = params.set('item', item).set('order', order);
+    }
+
+    return this.http.get<Publicacion[]>(this.api, {
+      params,
       withCredentials: true,
     });
   }
 
-  getPublicaionesUsuario(titulo: string): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(
-      `${this.api}/usuario?search=${titulo}`,
-      {
-        withCredentials: true,
-      }
-    );
+  getPublicaionesUsuario(
+    titulo?: string,
+    item?: string,
+    order?: string
+  ): Observable<Publicacion[]> {
+    let params = new HttpParams();
+
+    if (titulo) {
+      params = params.set('titulo', titulo);
+    }
+
+    if (item && order) {
+      params = params.set('item', item).set('order', order);
+    }
+
+    return this.http.get<Publicacion[]>(`${this.api}/usuario`, {
+      params,
+      withCredentials: true,
+    });
   }
 
   getPublicacion(publicacion_id: string): Observable<Publicacion> {

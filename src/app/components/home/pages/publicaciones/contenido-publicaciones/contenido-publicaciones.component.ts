@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PublicacionService } from '../../../../service/publicacion.service';
-import { Publicacion } from '../../../../interface/publicacion';
 import { CommonModule, Location } from '@angular/common';
-import { ComentarioService } from '../../../../service/comentario.service';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Comentario } from '../../../../interface/comentario';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DateFormatPipe } from '../../../../pipe/date-format.pipe';
-import { UsuarioService } from '../../../../service/usuario.service';
-import { Usuario } from '../../../../interface/usuario';
+import { DateFormatPipe } from '../../../../../pipe/date-format.pipe';
+import { Publicacion } from '../../../../../interface/publicacion';
+import { Comentario } from '../../../../../interface/comentario';
+import { Usuario } from '../../../../../interface/usuario';
+import { UsuarioService } from '../../../../../service/usuario.service';
+import { PublicacionService } from '../../../../../service/publicacion.service';
+import { ComentarioService } from '../../../../../service/comentario.service';
 
 @Component({
   selector: 'app-contenido-publicaciones',

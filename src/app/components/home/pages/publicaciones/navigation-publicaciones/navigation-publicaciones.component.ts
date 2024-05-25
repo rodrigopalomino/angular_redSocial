@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Publicacion } from '../../../../interface/publicacion';
-import { PublicacionService } from '../../../../service/publicacion.service';
-import { LikeService } from '../../../../service/like.service';
+import { Publicacion } from '../../../../../interface/publicacion';
+import { PublicacionService } from '../../../../../service/publicacion.service';
+import { LikeService } from '../../../../../service/like.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
-import { Like } from '../../../../interface/like';
+import { Like } from '../../../../../interface/like';
 import { CommonModule } from '@angular/common';
-import { DislikeService } from '../../../../service/dislike.service';
-import { Dislike } from '../../../../interface/dislike';
+import { DislikeService } from '../../../../../service/dislike.service';
+import { Dislike } from '../../../../../interface/dislike';
 import {
   FormBuilder,
   FormGroup,
@@ -47,22 +47,40 @@ export class NavigationPublicacionesComponent implements OnInit {
   createForm() {
     this.form = this.fb.group({
       titulo: ['', []],
+      item: ['', []],
+      order: ['', []],
     });
+  }
+
+  submit() {
+    if (this.bool) {
+      this.getPublicaciones();
+    } else {
+      this.getPublicacionesUsuario();
+    }
   }
 
   getPublicaciones() {
     const titulo = this.form.get('titulo')?.value;
+    const item = this.form.get('item')?.value;
+    const order = this.form.get('order')?.value;
     this.bool = true;
-    this._publicacionService.getPublicaciones(titulo).subscribe((data) => {
-      this.publicaciones = data;
-    });
+
+    this._publicacionService
+      .getPublicaciones(titulo, item, order)
+      .subscribe((data) => {
+        this.publicaciones = data;
+      });
   }
 
   getPublicacionesUsuario() {
     const titulo = this.form.get('titulo')?.value;
+    const item = this.form.get('item')?.value;
+    const order = this.form.get('order')?.value;
     this.bool = false;
+
     this._publicacionService
-      .getPublicaionesUsuario(titulo)
+      .getPublicaionesUsuario(titulo, item, order)
       .subscribe((data) => {
         this.publicaciones = data;
       });
@@ -90,11 +108,8 @@ export class NavigationPublicacionesComponent implements OnInit {
     this._likeService.like(publicacion_id).subscribe({
       next: (res: any) => {
         if (this.bool) {
-          console.log('1');
-
           this.getPublicaciones();
         } else {
-          console.log('2');
           this.getPublicacionesUsuario();
         }
         this.getLikes();
